@@ -1,11 +1,8 @@
 //=============================================================================
-//  MuseScore
-//  Linux Music Score Editor
-//  $Id:$
+//  Retrograde plugin
+//  http://musescore.org/en/project/retrograde
 //
-//  Test plugin
-//
-//  Copyright (C)2008-2010 Werner Schweer and others
+//  Copyright (C)2010 Nicolas Froment (lasconic)
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -20,19 +17,13 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-//
-//    This is ECMAScript code (ECMA-262 aka "Java Script")
-//
-
 //---------------------------------------------------------
 //    init
-//    this function will be called on startup of
-//    mscore
 //---------------------------------------------------------
 
 function init()
       {
-      // print("test script init");
+      
       };
 
 
@@ -118,11 +109,6 @@ function run()
       }
       
       };
-
-//---------------------------------------------------------
-//    menu:  defines were the function will be placed
-//           in the menu structure
-//---------------------------------------------------------
 
 var mscorePlugin = {
       menu: 'Plugins.Retrogade selection',
