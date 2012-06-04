@@ -51,7 +51,8 @@ function addRest(cursor, duration){
 
 function run()
       {
-      
+      if (typeof curScore === 'undefined')	
+            return; 
       var chordArray = [];
       var cursor       = new Cursor(curScore);
       var selectionEnd = new Cursor(curScore);
