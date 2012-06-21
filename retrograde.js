@@ -21,36 +21,32 @@
 //    init
 //---------------------------------------------------------
 
-function init()
-      {
-      
-      };
+function init() {
+};
 
 
-function addChord(cursor, duration){
+function addChord(cursor, duration) {
       var chord     = new Chord();
       chord.tickLen = duration;
       cursor.add(chord);
       cursor.next();
       return chord;
-}
+};
 
-function addNote(chord, pitch)
-      {
+function addNote(chord, pitch) {
       var note      = new Note();
       note.pitch    = pitch;
       chord.addNote(note);
-      };
+};
 
-function addRest(cursor, duration){
+function addRest(cursor, duration) {
      var rest = new Rest();
      rest.tickLen = duration;
      cursor.add(rest);
      cursor.next();
-}
+};
 
-function run()
-      {
+function run() {
       if (typeof curScore === 'undefined')	
             return; 
       var chordArray = [];
@@ -65,14 +61,13 @@ function run()
       for (var staff = startStaff; staff < endStaff; ++staff) {
             cursor.goToSelectionStart();
             cursor.voice = 0;
-            cursor.goToSelectionStart();
             cursor.staff = staff;
             
             while (cursor.tick() < selectionEnd.tick()) {
                 if (cursor.isChord()) {
                       var chord = cursor.chord();
                       chordArray.push(chord);
-                }else if (cursor.isRest()){
+                } else if (cursor.isRest()) {
                       var rest = cursor.rest();                    
                       chordArray.push(rest.tickLen);
                 }
@@ -84,6 +79,7 @@ function run()
       score.name  = "RetroScore";
       score.title = "RetroScore";
       score.appendPart("Flute");    // create one staff flute part
+      score.keysig = curScore.keysig;
       score.appendMeasures(50);      // append 50 empty measures
       var newCursor = new Cursor(score);
       newCursor.staff = 0;
@@ -91,23 +87,22 @@ function run()
       newCursor.rewind();
       chordArray.reverse();
       
-      for(var i = 0; i<chordArray.length; i++){
+      for (var i = 0; i<chordArray.length; i++) {
             var chord = chordArray[i];
-            if(typeof chord === 'object'){
+            if (typeof chord === 'object') {
                 var newChord = addChord(newCursor, chord.tickLen);
                 var n     = chord.notes;
                 for (var j = 0; j < n; j++) {
                       var note = chord.note(j);
                       addNote(newChord, note.pitch);
                 }
-            }else{
+            } else {
                 //add rest
                 var tickLen = chord;
                 addRest(newCursor, tickLen);
             }
       }
-      
-      };
+};
 
 var mscorePlugin = {
       menu: 'Plugins.Retrograde selection',
@@ -116,4 +111,3 @@ var mscorePlugin = {
       };
 
 mscorePlugin;
-
